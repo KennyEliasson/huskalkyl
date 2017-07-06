@@ -102,17 +102,19 @@
               <th>Driftskostnad</th>
               <th>Totalt</th>
               <th>Totalt per år</th>
+              <th></th>
             </tr>
             </thead>
 
             <tbody>
-              <tr v-for="interest in interests">
-                <td>{{interest}}%</td>
+              <tr v-for="(interest, index) in interests">
+                <td>{{interest | formatDecimal }}%</td>
                 <td>{{interestCharge(interest) | formatNumber }}</td>
                 <td>{{installment | formatNumber }}</td>
                 <td>{{operatingCostMonthly | formatNumber }}</td>
                 <td>{{total(interest) | formatNumber}}</td>
                 <td>{{total(interest)*12 | formatNumber}}</td>
+                <td class="clickable" v-on:click="removeInterestCalculation(index)">Ta bort</td>
               </tr>
             </tbody>
             <tfoot>
@@ -237,6 +239,9 @@ export default {
     addInterestCalculation: function () {
       this.interests.push(this.newInterest);
       this.interests.sort((a, b) => a - b);
+    },
+    removeInterestCalculation: function (index) {
+      this.interests.splice(index, 1);
     }
   }
 };
