@@ -7,14 +7,17 @@
             <a class="navbar-brand" href="#">Huskalkyl.se</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                  <router-link to="/buy">Köpa</router-link>
-                </li>
-                <li>
-                  <router-link to="/sell">Sälja</router-link>
-                </li>
-            </ul>
+          <ul class="nav navbar-nav">
+            <li>
+              <router-link to="/buy">Köpa bostad</router-link>
+            </li>
+            <li>
+              <router-link to="/sell">Sälja bostad</router-link>
+            </li>
+            <li>
+              <router-link to="/interest">Ränteberäkning</router-link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>

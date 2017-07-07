@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Hello from '@/components/Hello';
 import Sell from '@/components/Sell';
 import Buy from '@/components/Buy';
+import Interest from '@/components/Interest';
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/buy',
       name: 'Buy',
       component: Buy
+    },
+    {
+      path: '/interest',
+      name: 'Interest',
+      component: Interest
     }
   ]
 });

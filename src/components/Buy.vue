@@ -92,43 +92,43 @@
             </p>
           </div>
           <div class="table-responsive">
-          <table class="table table-striped">
-                      
-            <thead>
-            <tr>
-              <th>Ränta</th>
-              <th>Räntekostnad</th>
-              <th>Amortering</th>
-              <th>Driftskostnad</th>
-              <th>Totalt</th>
-              <th>Totalt per år</th>
-              <th></th>
-            </tr>
-            </thead>
-
-            <tbody>
-              <tr v-for="(interest, index) in interests">
-                <td>{{interest | formatDecimal }}%</td>
-                <td>{{interestCharge(interest) | formatNumber }}</td>
-                <td>{{installment | formatNumber }}</td>
-                <td>{{operatingCostMonthly | formatNumber }}</td>
-                <td>{{total(interest) | formatNumber}}</td>
-                <td>{{total(interest)*12 | formatNumber}}</td>
-                <td class="clickable" v-on:click="removeInterestCalculation(index)">Ta bort</td>
-              </tr>
-            </tbody>
-            <tfoot>
+            <table class="table table-striped">
+                        
+              <thead>
               <tr>
-                <td colspan="100" class="form-inline">
-                  <div class="input-group">
-                    <input type="number" lang="en-150" class="form-control input-sm" min="0" max="100" step="0.01" v-model="newInterest" />
-                    <span class="input-group-addon">%</span>
-                  </div>
-                  <button class="btn btn-primary btn-sm" v-on:click="addInterestCalculation">Lägg till ränteberäkning</button>
-                </td>
+                <th>Ränta</th>
+                <th>Räntekostnad</th>
+                <th>Amortering</th>
+                <th>Driftskostnad</th>
+                <th>Totalt</th>
+                <th>Totalt per år</th>
+                <th></th>
               </tr>
-            </tfoot>
-          </table>
+              </thead>
+
+              <tbody>
+                <tr v-for="(interest, index) in interests">
+                  <td>{{interest | formatDecimal }}%</td>
+                  <td>{{interestCharge(interest) | formatNumber }}</td>
+                  <td>{{installment | formatNumber }}</td>
+                  <td>{{operatingCostMonthly | formatNumber }}</td>
+                  <td>{{total(interest) | formatNumber}}</td>
+                  <td>{{total(interest)*12 | formatNumber}}</td>
+                  <td class="clickable" v-on:click="removeInterestCalculation(index)">Ta bort</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="100" class="form-inline">
+                    <div class="input-group">
+                      <input type="number" lang="en-150" class="form-control input-sm" min="0" max="100" step="0.01" v-model="newInterest" />
+                      <span class="input-group-addon">%</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm" v-on:click="addInterestCalculation">Lägg till ränteberäkning</button>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
 
@@ -150,9 +150,9 @@
         </div>
         
         </div>
-			</div>
-		</div>
-	</section>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -170,25 +170,25 @@ export default {
     };
   },
   watch: {
-    'contribution': function (val) {
+    contribution (val) {
       if(val > this.price)
         this.contribution = this.price;
     }
   },
   computed: {
-    minimumContribution: function () {
+    minimumContribution () {
       return this.price * 0.15;
     },
-    loan: function () {
+    loan () {
       return this.price - this.contribution;
     },
-    operatingCostMonthly: function () {
+    operatingCostMonthly () {
       return this.operatingCost / 12;
     },
-    advanceRation: function () {
+    advanceRation () {
       return (this.loan / this.price) * 100;
     },
-    installmentRatePerYear: function () {
+    installmentRatePerYear () {
       if(this.advanceRation > 70)
         return 0.02;
 
@@ -197,23 +197,23 @@ export default {
 
       return 0;
     },
-    installment: function () {
+    installment () {
       if(this.installmentRatePerYear > 0)
         return this.loan * this.installmentRatePerYear / 12;
 
       return 0;
     },
-    mortgageDeedCost: function () {
+    mortgageDeedCost () {
       var mortgageDeedDiff = this.loan - this.mortgageDeed;
       if(mortgageDeedDiff > 0)
         return mortgageDeedDiff * 0.02;
 
       return 0;
     },
-    titleDeedCost: function () {
+    titleDeedCost () {
       return 825 + (this.price * 0.015);
     },
-    valid: function () {
+    valid () {
       if(this.price < 1)
         return false;
 
@@ -225,7 +225,7 @@ export default {
 
       return true;
     },
-    satisfiedMinimumContribution: function () {
+    satisfiedMinimumContribution () {
       return this.minimumContribution <= this.contribution;
     }
   },
