@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import NavbarStore from '../NavbarStore';
+import NavbarStore from '@/NavbarStore';
 
 export default {
   name: 'navbar',

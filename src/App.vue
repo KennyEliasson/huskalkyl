@@ -1,4 +1,3 @@
-<style src="./assets/main.less" lang="less"></style>
 <template>
   <div id="app">
 
@@ -9,7 +8,7 @@
 </template>
 
 <script>
-import Navbar from './Components/Navbar';
+import Navbar from '@/components/Navbar';
 export default {
   components: {Navbar},
   name: 'app'
@@ -21,3 +20,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+<style src="./assets/main.less" lang="less"></style>
