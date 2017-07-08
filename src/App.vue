@@ -1,3 +1,4 @@
+<style src="./assets/main.less" lang="less"></style>
 <template>
   <div id="app">
 

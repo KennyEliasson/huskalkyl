@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Hello from '@/components/Hello';
 import Sell from '@/components/Sell';
 import Buy from '@/components/Buy';
 import Interest from '@/components/Interest';
@@ -14,8 +13,8 @@ var router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Buy',
+      component: Buy
     },
     {
       path: '/sell',
