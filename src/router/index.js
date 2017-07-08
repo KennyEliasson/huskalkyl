@@ -4,10 +4,13 @@ import Hello from '@/components/Hello';
 import Sell from '@/components/Sell';
 import Buy from '@/components/Buy';
 import Interest from '@/components/Interest';
+import NavbarStore from '@/NavbarStore';
 
 Vue.use(Router);
 
-export default new Router({
+var router = new Router({
+  mode: 'history',
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
@@ -31,3 +34,11 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  // Make sure to close the navbar when in mobile mode
+  NavbarStore.close();
+  next();
+});
+
+export default router;

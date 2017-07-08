@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-4 pricing-table bordered hover-animation" v-bind:class="{'deposit': calculation.deposit, 'loan': !calculation.deposit}">
+  <div class="col-md-4 pricing-table bordered cool hover-animation" v-bind:class="{'deposit': calculation.deposit, 'loan': !calculation.deposit}">
     <div class="locked" v-show="!calculation.active">
       <button type="button" class="btn btn-lg btn-loan" v-on:click="activate(false)">Lägg till ränteberäkning</button>
       <br />
@@ -10,6 +10,7 @@
       <li class="title">
         <span contenteditable>{{calculation.name}}</span>
       </li>
+
       <li class="price">
         <span class="currency-symbol"></span>
         <strong>{{ calculation.calculate().total | formatNumber }}</strong>
@@ -18,6 +19,7 @@
         <em v-show="!calculation.deposit">i räntekostnad</em>
         <em v-show="calculation.deposit">på kontot!</em>
       </li>
+
       <li>
         <div class="form-group">
           <label class="control-label">
@@ -26,14 +28,14 @@
           </label>
           <div class="pull-right col-xs-7 form-control-holder">
             <div class="input-group">
-              <input v-model="calculation.amount" type="text" class="form-control text-right" />
+              <input v-model.number="calculation.amount" type="text" class="form-control text-right" />
               <span class="input-group-addon">kr</span>
             </div>
           </div>
         </div>									
       </li>
+
       <li>
-      
         <div class="form-group">
           <label class="control-label">Räntesats</label>	
           <div class="pull-right col-xs-6 form-control-holder">
@@ -44,6 +46,7 @@
           </div>
         </div>
       </li>
+
       <li>
         <div class="form-group">
           <label class="control-label">
@@ -52,15 +55,14 @@
           </label>	
           <div class="pull-right col-xs-7 form-control-holder">
             <div class="input-group">
-              <input v-model="calculation.installment" type="text" class="form-control text-right" />
+              <input v-model.number="calculation.installment" type="text" class="form-control text-right" />
               <span class="input-group-addon">kr</span>
             </div>
           </div>
         </div>
       </li>
-						
+            
       <li>
-      
         <div class="form-group" v-show="!calculation.deposit">
           <label class="control-label">Avbetalt</label>	
           
@@ -84,52 +86,51 @@
         <div class="form-group" v-show="calculation.deposit">
           <label class="control-label">Antal år</label>	
           <div class="pull-right col-xs-3 form-control-holder">
-            <input type="text" v-model="calculation.years" class="form-control text-right">
+            <input type="text" v-model.number="calculation.years" class="form-control text-right">
           </div>
         </div>
       </li>
+          
+
+          <!--
+          <li class="button" ng-show="!deposit">
+            Se beräkning per år
+            <a href="" ng-show="!calculation.tooLowInstallment" ng-click="calculation.showOverview=!calculation.showOverview" ng-class="{'glyphicon-chevron-down': !calculation.showOverview, 'glyphicon-chevron-up': calculation.showOverview}" class="glyphicon "></a></span>
             
+            <div ng-show="calculation.showOverview && !calculation.tooLowInstallment">
+              
+              <div>
+                <span class="Installment">(Siffra inom parantes avser kostnad inklusive amortering)</span>
+                <table class="table table-condensed table-striped table-hover" style="margin-bottom:0;">
+                  <thead>
+                    <tr>
+                      <th style="width:10%"></th>
+                      <th style="width:50%" class="text-right">Årskostnad</th>
+                      <th style="width:40%" class="text-right">Månadskostnad</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div style="max-height:200px;overflow:auto;">
+                
+                <table class="table table-condensed table-striped table-hover">
+                  
+                  <tbody>
+                    <tr ng-repeat="year in calculation.result.overview">
+                      <td style="width:10%">{{year.id}}</td>
+                      <td style="width:50%" class="text-right">{{year.sum}} <span class="Installment">({{year.sumWithInstallment}})</span></td>
+                      <td style="width:40%" class="text-right">{{year.monthly}} <span class="Installment">({{year.monthlyWithInstallment}})</span></td>
+                    </tr>
+                  </tbody>
 
-						<!--
-						<li class="button" ng-show="!deposit">
-							Se beräkning per år
-							<a href="" ng-show="!calculation.tooLowInstallment" ng-click="calculation.showOverview=!calculation.showOverview" ng-class="{'glyphicon-chevron-down': !calculation.showOverview, 'glyphicon-chevron-up': calculation.showOverview}" class="glyphicon "></a></span>
-							
-							<div ng-show="calculation.showOverview && !calculation.tooLowInstallment">
-								
-								<div>
-									<span class="Installment">(Siffra inom parantes avser kostnad inklusive amortering)</span>
-									<table class="table table-condensed table-striped table-hover" style="margin-bottom:0;">
-										<thead>
-											<tr>
-												<th style="width:10%"></th>
-												<th style="width:50%" class="text-right">Årskostnad</th>
-												<th style="width:40%" class="text-right">Månadskostnad</th>
-											</tr>
-										</thead>
-									</table>
-								</div>
-								<div style="max-height:200px;overflow:auto;">
-									
-									<table class="table table-condensed table-striped table-hover">
-										
-										<tbody>
-											<tr ng-repeat="year in calculation.result.overview">
-												<td style="width:10%">{{year.id}}</td>
-												<td style="width:50%" class="text-right">{{year.sum}} <span class="Installment">({{year.sumWithInstallment}})</span></td>
-												<td style="width:40%" class="text-right">{{year.monthly}} <span class="Installment">({{year.monthlyWithInstallment}})</span></td>
-											</tr>
-										</tbody>
-
-									</table>
-								</div>
-								
-							</div>
-							
-						</li>-->
-					</ul>
-
-				</div>
+                </table>
+              </div>
+              
+            </div>
+            
+          </li>-->
+    </ul>
+  </div>
 </template>
 
 <script>

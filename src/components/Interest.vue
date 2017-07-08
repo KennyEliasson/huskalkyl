@@ -10,8 +10,8 @@
         </div>
       </div>
 
-      <div class="row" v-for="loan in loans">
-				<InterestCalculationComponent v-bind:calculation="loan" v-on:activate="calculationActivated" />
+      <div class="row">
+				<InterestCalculationComponent v-for="loan in loans" v-bind:calculation="loan" v-on:activate="calculationActivated" />
       </div>
 
     </div>

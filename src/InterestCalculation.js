@@ -26,24 +26,31 @@ export default class InterestCalculation {
   }
 
   cacheKey () {
-    return [this.amount, this.interest, this.installment, this.years].join('_');
+    return [this.amount, this.interest, !!this.deposit, this.installment, this.years].join('_');
   }
 
   calculate () {
     // Create a list of every calculation later?
     if(this.cachedResult.key === this.cacheKey())
-      return this.cachedResult;
+      return this.cachedResult.result;
 
+    var result;
     if(this.deposit)
-      return this.calculateDeposit(this.interest / 100);
+      result = this.calculateDeposit(this.interest / 100);
+    else
+      result = this.calculateCosts(this.interest / 100);
 
-    return this.calculateCosts(this.interest / 100);
+    this.cachedResult.key = this.cacheKey();
+    this.cachedResult.result = result;
+
+    return result;
   }
 
   calculateDeposit (interest) {
     var result = this.amount;
+    var months = this.years * 12;
 
-    for(var i = 0; i < this.years * 12; i++) {
+    for(var i = 0; i < months; i++) {
       var montlyInterestCharge = (result * interest) / 12;
       result += montlyInterestCharge + this.installment;
     }
