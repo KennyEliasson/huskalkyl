@@ -40,7 +40,7 @@
           <label class="control-label">Räntesats</label>	
           <div class="pull-right col-xs-6 form-control-holder">
             <div class="input-group">
-              <input v-model.number="calculation.interest" type="number" class="form-control text-right" />
+              <input v-model.number="calculation.interest" type="number" class="form-control text-right" lang="en-150" min="0" max="100" step="0.01" />
               <span class="input-group-addon">%</span>
             </div>
           </div>

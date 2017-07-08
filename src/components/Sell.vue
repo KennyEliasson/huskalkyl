@@ -38,7 +38,7 @@
                   <label for="arvode" class="col-sm-2 control-label">Mäklararvode</label>
                   <div class="col-sm-2">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="arvode" v-model="commision">
+                      <input type="text" class="form-control" id="arvode" v-model="commision" lang="en-150" min="0" max="100" step="0.01">
                       <span class="input-group-addon">%</span>
                     </div>
                   </div>
@@ -68,7 +68,7 @@
                     <label for="arvode" class="col-sm-2 control-label">% av belopp över utgångspris</label>
                     <div class="col-sm-2">
                       <div class="input-group">
-                        <input type="text" class="form-control" id="commisionExtraPercentage" v-model.number="commisionExtraPercentage">
+                        <input type="text" class="form-control" id="commisionExtraPercentage" v-model.number="commisionExtraPercentage" lang="en-150" min="0" max="100" step="0.01">
                         <span class="input-group-addon">%</span>
                       </div>
 
