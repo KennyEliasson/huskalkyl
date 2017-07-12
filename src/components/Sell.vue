@@ -82,7 +82,7 @@
                   <label for="price" class="col-sm-2 control-label">Inköpspris</label>
                   <div class="col-sm-2">
                     <div class="input-group">
-                      <input type="number" class="form-control" id="price" v-model="price">
+                      <input type="number" class="form-control" id="price" v-model.number="price">
                       <span class="input-group-addon">kr</span>
                     </div>
                   </div>
@@ -91,7 +91,7 @@
                   <label for="improve" class="col-sm-2 control-label">Förbättringsåtgärder</label>
                   <div class="col-sm-2">
                     <div class="input-group">
-                      <input type="number" class="form-control" id="improve" v-model="improvement">
+                      <input type="number" class="form-control" id="improve" v-model.number="improvement">
                       <span class="input-group-addon">kr</span>
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                   <label for="uppskov" class="col-sm-2 control-label">Uppskov av skatt</label>
                   <div class="col-sm-2">
                     <div class="input-group">
-                      <input type="number" class="form-control" id="uppskov" v-model="uppskov">
+                      <input type="number" class="form-control" id="uppskov" v-model.number="uppskov">
                       <span class="input-group-addon">kr</span>
                     </div>
                   </div>
@@ -109,7 +109,7 @@
                   <label for="loan" class="col-sm-2 control-label">Lån på bostaden</label>
                   <div class="col-sm-2">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="loan" v-model="loan">
+                      <input type="text" class="form-control" id="loan" v-model.number="loan">
                       <span class="input-group-addon">kr</span>
                     </div>
                   </div>
@@ -185,9 +185,9 @@
                       <td style="border-top:2px solid #ccc"><strong>Kvar i din plånbok</strong></td>
                       <td class="money" style="border-top:2px solid #ccc" v-for="percentage in percentageRanges"><strong>{{ total(percentage) | formatNumber }}</strong></td>
                     </tr>
-                    <tr class="no-border" style="font-style:italic;">
-                      <td style="padding-top:40px;">Belåningsgrad</td>
-                      <td class="money" style="padding-top:40px;" v-for="percentage in percentageRanges">{{ advanceRation(percentage) | formatNumber }}%</td>
+                    <tr>
+                      <td style="border-top:2px solid #ccc"><strong>Värdeökning (efter skatt och utgifter)</strong></td>
+                      <td class="money" style="border-top:2px solid #ccc" v-for="percentage in percentageRanges"><strong>{{ equity(percentage) | formatNumber }}%</strong></td>
                     </tr>
                   </tbody>
                 </table>
@@ -247,8 +247,8 @@ export default {
     total (percentage) {
       return this.moneyLeft(percentage) - this.loan;
     },
-    advanceRation (percentage) {
-      return (this.loan / this.saleCalculation(percentage)) * 100;
+    equity (percentage) {
+      return (this.total(percentage) / this.price) * 100;
     }
   }
 };

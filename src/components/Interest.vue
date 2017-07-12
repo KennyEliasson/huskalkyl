@@ -15,7 +15,7 @@
       </div>
 
       <div class="row">
-				<InterestCalculationComponent v-for="loan in loans" v-bind:calculation="loan" v-on:activate="calculationActivated" />
+				<InterestCalculationComponent v-for="loan in loans" v-bind:key="loan" v-bind:calculation="loan" v-on:activate="calculationActivated" />
       </div>
 
     </div>

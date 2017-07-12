@@ -10,7 +10,7 @@ let formatNumber = function (v, c, d, t) {
 };
 
 let formatDecimal = function (val) {
-  return val.toFixed(2);
+  return parseFloat(val).toFixed(2);
 };
 
 export { formatNumber, formatDecimal };
